@@ -1,1 +1,96 @@
-Leeme
+
+Estan dos verciones de C4, uno que trabaja con el Api Manager y el otro que se conectaba directamente a los servicios de Akame
+
+Los archivos que difieren entre una versión y otra son:
+
+bak/functions.php
+js/global.js
+js/dash.js
+
+Los demás archivos son iguales en ambas versiones.
+
+
+******************************************
+
+
+c4ApiManager:
+
+En esta carpeta se encuentran el desarrollo que está conectado al Api manager
+
+El archivo de functions.php, se encuetra conectado al Api manager, mediante la función curl()
+
+En ella, dependiendo de las ip asignada a la variable:
+	$ipApiM
+es a donde se conectará al Api Manager.
+
+La función curl, acepta protocolos HTTP y HTTPS, en ella se acepta cualquier tipo de Request, desde GET, PUT, POST, DELETE entre otros.
+
+También esta diseñada para mandar datos y enviar headers para los tokens generados por el Api Manager.
+
+Otro de los cambios importantes en este archivo, es la función para regenerar los tokens, regeneraToken().
+
+Esta función, entra automáticamente cuando el token enviado ya no sea válido, actualiza una cookie encriptada y todo el proceso continua normalmente, no interfiere en ningún momento con cualquier proceso que se esté tratando de realizar, sin que el usuario note algún cambio.
+
+Los servicios para campañas y usuarios ya están conectados al Api Manager en esta versión, existen algunos otros como el de divisiones que también lo esta.
+
+Faltan por conectar algunos otros servicios, deben verificarlos en el archivo "urls_API.xlsx" para hacer el "switch" entre la url de akame y la url del api manager.
+
+Confome he ido conectando los servicios a Api Manager, he ido modificando los archivos global.js y dash.js, esto en el objeto de promesas, para ir eliminando el nombre del objeto dentro de este y sólo dejar promesas.All, de manera que, todas las promesas se manden a este objeto, sólo es necesario mandar la clave que tienen los otros objetos y la data, en caso de ser requerida.
+
+Entonces, en dash.js, cambiaba las promesas a promesas.All y agregaba la clave a la data que enviaba para que functions.php me devolviera la información pertinente solicitada.
+
+
+******************************************
+
+
+c4NoApi:
+
+Dentro de esta carpeta, se encuentra la última versión estable que se encuentra conectada directamente a Akame.
+
+En el archivo functions.php, existen dos variables para las ips, uno para los servicios de Akame ( $ipServ ) y la otra para el login ( $ipWso2 )
+
+También en este archivo, se encuentra la función curl(), que, acepta protocolos HTTPS y HTTP y cualquier método para los request de los servicios REST de Akame.
+
+En esta versión, no hace falta nada, funciona correctamente como está hasta el momento.
+
+
++++++++++++++++++++++++++++++++++++++++++++
+
+
+Rutas de archivos:
+
+/:
+	bak/
+	dashboard/
+	fonts/
+	imgCamps/
+	css/
+	img/
+	imgContratos/
+	js/
+	index.html
+	favicon.ico
+
+	bak/
+		mailer/
+		functions.php
+		index.html
+
+	dashboard/
+		index.html
+		favicon.ico
+		submit.php
+
+	js/
+		angular.js
+		esp.json
+		index.html
+		login.js
+		dash.js
+		global.js
+		jquery.js
+		plugs.js
+
+
+*******************************************
+
